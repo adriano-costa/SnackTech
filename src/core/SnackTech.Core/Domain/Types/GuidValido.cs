@@ -1,6 +1,6 @@
 namespace SnackTech.Core.Domain.Types;
 
-internal struct GuidValido
+internal struct GuidValido : IEquatable<GuidValido>
 {
     internal Guid Valor { readonly get; private set; }
 
@@ -47,7 +47,15 @@ internal struct GuidValido
         }
         else
         {
-            throw new ArgumentException($"A IdentificaÁ„o informada {guidValue} n„o È um Guid v·lido.");
+            throw new ArgumentException($"A Identifica√ß√£o informada {guidValue} n√£o √© um Guid v√°lido.");
         }
+    }
+
+    public bool Equals(GuidValido other)
+    {
+        if (other == null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return this.Valor == other.Valor;
     }
 }

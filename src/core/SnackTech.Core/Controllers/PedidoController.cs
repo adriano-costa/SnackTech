@@ -1,3 +1,4 @@
+using System.CodeDom.Compiler;
 using Microsoft.Extensions.Options;
 using SnackTech.Common.Dto;
 using SnackTech.Common.Dto.Api;
@@ -68,6 +69,42 @@ public class PedidoController(IPedidoDataSource pedidoDataSource,
         var produtoGateway = new ProdutoGateway(produtoDataSource);
 
         var resultado = await PedidoUseCase.AtualizarItensPedido(pedidoAtualizado, pedidoGateway, produtoGateway);
+
+        return resultado;
+    }
+
+    public async Task<ResultadoOperacao<IEnumerable<PedidoRetornoDto>>> ListarPedidosAtivos()
+    {
+        var pedidoGateway = new PedidoGateway(pedidoDataSource);
+
+        var pedidos = await PedidoUseCase.ListarPedidosAtivos(pedidoGateway);
+
+        return pedidos;
+    }
+
+    public async Task<ResultadoOperacao> IniciarPreparacaoPedido(string identificacao)
+    {
+        var pedidoGateway = new PedidoGateway(pedidoDataSource);
+
+        var resultado = await PedidoUseCase.IniciarPreparacaoPedido(identificacao, pedidoGateway);
+
+        return resultado;
+    }
+
+    public async Task<ResultadoOperacao> ConcluirPreparacaoPedido(string identificacao)
+    {
+        var pedidoGateway = new PedidoGateway(pedidoDataSource);
+
+        var resultado = await PedidoUseCase.ConcluirPreparacaoPedido(identificacao, pedidoGateway);
+
+        return resultado;
+    }
+
+    public async Task<ResultadoOperacao> FinalizarPedido(string identificacao)
+    {
+        var pedidoGateway = new PedidoGateway(pedidoDataSource);
+
+        var resultado = await PedidoUseCase.FinalizarPedido(identificacao, pedidoGateway);
 
         return resultado;
     }

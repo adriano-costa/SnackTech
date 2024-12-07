@@ -2,7 +2,7 @@
 using SnackTech.Common.CustomExceptions;
 using SnackTech.Common.Dto.DataSource;
 using SnackTech.Common.Interfaces.DataSources;
-using SnackTech.Domain.Enums;
+using SnackTech.Common.Enums;
 using SnackTech.Driver.DataBase.Context;
 using SnackTech.Driver.DataBase.Entities;
 using SnackTech.Driver.DataBase.Util;
@@ -114,13 +114,13 @@ public class PedidoDataSource(RepositoryDbContext repositoryDbContext) : IPedido
         return pedidosBanco.Select(Mapping.Mapper.Map<PedidoDto>);
     }
 
-    public async Task<IEnumerable<PedidoDto>> PesquisarPedidosPorStatusAsync(int valor)
+    public async Task<IEnumerable<PedidoDto>> PesquisarPedidosPorStatusAsync(int[] valor)
     {
         var pedidosBanco = await repositoryDbContext.Pedidos
                    .AsNoTracking()
                    .Include(p => p.Cliente)
                    .Include(p => p.Itens).ThenInclude(i => i.Produto)
-                   .Where(p => (int)p.Status == valor)
+                   .Where(p => valor.Contains((int)p.Status))
                    .ToListAsync();
 
         return pedidosBanco.Select(Mapping.Mapper.Map<PedidoDto>);

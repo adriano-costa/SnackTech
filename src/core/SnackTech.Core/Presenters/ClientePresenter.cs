@@ -3,7 +3,7 @@ using SnackTech.Core.Domain.Entities;
 
 namespace SnackTech.Core.Presenters;
 
-internal class ClientePresenter
+internal static class ClientePresenter
 {
     internal static ResultadoOperacao<ClienteDto> ApresentarResultadoCliente(Cliente cliente)
     {
@@ -15,7 +15,7 @@ internal class ClientePresenter
     {
         return new ClienteDto
         {
-            Id = cliente.Id,
+            IdentificacaoCliente = cliente.Id,
             Nome = cliente.Nome.Valor,
             Email = cliente.Email.Valor,
             Cpf = cliente.Cpf.Valor
