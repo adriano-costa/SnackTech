@@ -40,7 +40,6 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 await using var dbContext = scope.ServiceProvider.GetRequiredService<RepositoryDbContext>();
-await dbContext.Database.MigrateAsync();
 
 if (app.Environment.IsDevelopment())
 {
