@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: snack-tech-api-container
-        image: 973456712332.dkr.ecr.us-east-1.amazonaws.com/snack-tech:alpha
+        image: #{{ ecr_image_url_repo_tag }}
         env:
           - name: ASPNETCORE_ENVIRONMENT
             value: Production
