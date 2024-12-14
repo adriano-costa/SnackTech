@@ -52,7 +52,7 @@ jobs:
         env:
           MSSQL_CONNECTION_STRING: ${{ secrets.K8S_DB_CONNECTION_STRING }}
         run: |
-          yq e '.data["msslq-connection-string"] = $MSSQL_CONNECTION_STRING' -i src/infra/eks/api/01-snack-tech-api-secret.yaml || { echo "Error updating msslq-connection-string value"; exit 1; }
+          yq e '.data["msslq-connection-string"] = "$MSSQL_CONNECTION_STRING"' -i src/infra/eks/api/01-snack-tech-api-secret.yaml || { echo "Error updating msslq-connection-string value"; exit 1; }
       
       - name: Replace ECR image string value
         env:
@@ -60,7 +60,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: latest
         run: |
-          yq e '.spec.template.spec.containers[0].image = $ECR_REGISTRY + "/" + $ECR_REPOSITORY + ":" + $IMAGE_TAG' -i src/infra/eks/api/02-snack-tech-api-deployment.yaml || { echo "Error updating ecr_image_url_repo_tag value"; exit 1; }
+          yq e '.spec.template.spec.containers[0].image = "$ECR_REGISTRY + "/" + $ECR_REPOSITORY + ":" + $IMAGE_TAG"' -i src/infra/eks/api/02-snack-tech-api-deployment.yaml || { echo "Error updating ecr_image_url_repo_tag value"; exit 1; }
       - name: Deploy to EKS
         run: |
           kubectl apply -f src/infra/eks/api
