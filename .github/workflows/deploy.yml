@@ -60,7 +60,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: latest
         run: |
-          yq e '.spec.template.spec.containers[0].image = env.ECR_REGISTRY + "/" + env.ECR_REPOSITORY + ":" + env.IMAGE_TAG' -i src/infra/eks/api/02-snack-tech-api-deployment.yml || { echo "Error updating ecr_image_url_repo_tag value"; exit 1; }
+          yq e '.spec.template.spec.containers[0].image = env.ECR_REGISTRY + "/" + env.ECR_REPOSITORY + ":" + env.IMAGE_TAG' -i src/infra/eks/api/02-snack-tech-api-deployment.yaml || { echo "Error updating ecr_image_url_repo_tag value"; exit 1; }
 
       - name: Deploy to EKS
         run: |
