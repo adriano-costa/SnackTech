@@ -34,7 +34,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: latest
         run: |
-          docker build -f infra.web-api/SnackTech.Driver.API/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG src
+          docker build -f src/infra.web-api/SnackTech.Driver.API/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG src
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       # Install Kubectl (generic installation method)
