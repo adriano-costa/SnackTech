@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - deploy
+      - development
 
 jobs:
   build-and-deploy:
@@ -38,7 +38,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      # Install Kubectl (generic installation method)
+      # Install Kubectl (generic installation method)j
       - name: Install Kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
