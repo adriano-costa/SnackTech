@@ -40,7 +40,6 @@ if (string.IsNullOrEmpty(dbConnectionString))
 
 builder.Services.AddDbContext<RepositoryDbContext>(options =>
     options.UseSqlServer(dbConnectionString));
-
 builder.Services.AddHealthChecks()
     .ConfigureSQLHealthCheck();
 
@@ -48,6 +47,7 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 await using var dbContext = scope.ServiceProvider.GetRequiredService<RepositoryDbContext>();
+await dbContext.Database.MigrateAsync();
 
 if (app.Environment.IsDevelopment())
 {
