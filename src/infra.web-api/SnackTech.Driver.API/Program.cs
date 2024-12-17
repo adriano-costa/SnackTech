@@ -40,7 +40,6 @@ if (string.IsNullOrEmpty(dbConnectionString))
 
 builder.Services.AddDbContext<RepositoryDbContext>(options =>
     options.UseSqlServer(dbConnectionString));
-
 builder.Services.AddHealthChecks()
     .ConfigureSQLHealthCheck();
 
