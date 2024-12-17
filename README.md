@@ -1,6 +1,7 @@
 # SnackTech ![ ](LogoSnackTech.png)
 
-#### [Video de apresentação](https://www.youtube.com/watch?v=jzBI3kgGVEs) 
+#### [Video de apresentação Fase 2](https://www.youtube.com/watch?v=jzBI3kgGVEs) 
+#### [Video de apresentação Fase 3](https://www.youtube.com/watch?v=iPNvz7QVQVg) 
 
 
 ## O Problema
